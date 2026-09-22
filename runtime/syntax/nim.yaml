@@ -20,32 +20,39 @@ rules:
     
     - constant.string:
         start: "\""
-        end: "\""
+        end: "(\"|$)"
         skip: "\\\\."
         rules:
             - constant.specialChar: "\\\\([\"'abceflnprtv\\\\]|\\d+|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\})"
 
     - constant.string:
-        start: "'"
-        end: "'"
+        start: "(r|R)\""
+        end: "(\"|$)"
         skip: "\\\\."
-        rules:
-            - constant.specialChar: "\\\\([\"'abceflnprtv\\\\]|\\d+|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\})"
+        rules: []
 
     - constant.string:
         start: "\"\"\""
         end: "\"\"\""
         skip: "\\\\."
+        rules: []
+
+    - constant.string:
+        start: "'"
+        end: "('|$)"
+        skip: "\\\\."
         rules:
+            - error: "[[:graph:]]{2,}'"
             - constant.specialChar: "\\\\([\"'abceflnprtv\\\\]|\\d+|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\})"
+
+    - comment:
+        start: "#\\["
+        end: "\\]#"
+        rules:
+            - todo: "(TODO|FIXME|XXX):?"
 
     - comment:
         start: "#"
         end: "$"
-        rules:
-            - todo: "(TODO|FIXME|XXX):?"
-    - comment:
-        start: "\\#\\["
-        end: "\\]\\#"
         rules:
             - todo: "(TODO|FIXME|XXX):?"
