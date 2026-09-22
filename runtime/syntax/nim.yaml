@@ -17,33 +17,33 @@ rules:
     - constant.number: "\\b0[ocC][0-7][0-7_]+\\b"
     - constant.number: "\\b0[bB][01][01_]+\\b"
     - constant.number: "\\b[0-9_]((\\.?)[0-9_]+)?[eE][+\\-][0-9][0-9_]+\\b"
-    
+
+    - constant.string:
+        start: "([a-zA-Z0-9_]+)?\"\"\""
+        end: "\"\"\"+"
+        skip: "\\\\."
+        rules: []
+
+    - constant.string:
+        start: "[a-zA-Z0-9_]+\""
+        end: "\""
+        skip: '""'
+        rules: []
+
     - constant.string:
         start: "\""
-        end: "(\"|$)"
+        end: "\""
         skip: "\\\\."
         rules:
             - constant.specialChar: "\\\\([\"'abceflnprtv\\\\]|\\d+|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\})"
-
-    - constant.string:
-        start: "(r|R)\""
-        end: "(\"|$)"
-        skip: "\\\\."
-        rules: []
-
-    - constant.string:
-        start: "\"\"\""
-        end: "\"\"\""
-        skip: "\\\\."
-        rules: []
 
     - constant.string:
         start: "'"
-        end: "('|$)"
+        end: "'"
         skip: "\\\\."
         rules:
             - error: "[[:graph:]]{2,}'"
-            - constant.specialChar: "\\\\([\"'abceflnprtv\\\\]|\\d+|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\})"
+            - constant.specialChar: "\\\\([\"'abceflnrtv\\\\]|\\d+|x[0-9A-Fa-f]{2})"
 
     - comment:
         start: "#\\["
