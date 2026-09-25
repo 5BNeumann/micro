@@ -7,7 +7,11 @@ rules:
     - preproc: "[\\{\\|]\\b(atom|lit|sym|ident|call|lvalue|sideeffect|nosideeffect|param|genericparam|module|type|let|var|const|result|proc|method|iterator|converter|macro|template|field|enumfield|forvar|label|nk[a-zA-Z]+|alias|noalias)\\b[\\}\\|]"
     - statement: "\\b(addr|and|as|asm|bind|block|break|case|cast|concept|const|continue|converter|defer|discard|distinct|div|do|elif|else|end|enum|except|export|finally|for|from|func|if|import|in|include|interface|is|isnot|iterator|let|macro|method|mixin|mod|nil|not|notin|object|of|or|out|proc|ptr|raise|ref|return|shl|shr|static|template|try|tuple|type|using|var|when|while|with|xor|yield)\\b"
     - symbol.operator: "[=\\+\\-\\*/<>@\\$~&%\\|!\\?\\^\\.:\\\\,;]+"
-    - special: "\\{\\.|\\.\\}|\\[\\.|\\.\\]|\\(\\.|\\.\\)"
+    - special:
+        start: "{."
+        end: ".}"
+        rules:
+            - statement: "\\b(depracated|compileTime|noreturn|acyclic|final|shallow|pure|asmNoStackFrame|error|fatal|warning|hint|line|linearScanEnd|computedGoto|immediate|redefine|compilation|push|pop|register|global|used|experimental|bitsize|size|align|noalias|volatile|nodecl|header|incompleteStruct|completeStruct|compile|link|passc|localPassC|passl|emit|importCpp|importJs|importObjC|codegenDecl|cppNonPod|define|intdefine|strdefine|booldefine|pragma|importc|exportc|exportCpp|extern|bycopy|byref|varargs|union|packed|dynlib|thread|threadvar|guard|locks)\\b"
     - special:
         start: "`"
         end: "`"
